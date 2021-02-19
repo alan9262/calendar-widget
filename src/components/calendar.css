@@ -1,21 +1,39 @@
-.calendar-container,
+.container,
 .calendar,
-.calendar-header,
+.header,
 td,
 tr {
     padding: 0;
     margin: 0;
 }
 
-.container {
-    border: 2px solid skyblue;
+.divider {
+  display: flex;
 }
+
 
 .calendar {
     background-color: white;
     border-spacing: 0;
-    border-collapse: collapse;
     width: 100%;
+    display: inline-block;
+    margin: 25px 0;
+    font-size: 1.6em;
+    font-family: cursive;
+    min-width: 270px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    
+}
+
+button {
+  background-color: oldlace;
+  border-radius: 25px;
+}
+
+.switchers {
+  display: inline;
+  cursor: pointer;
+  margin-left: 0.5em;
 }
 
 .header {
@@ -30,9 +48,15 @@ tr {
 
 .day,
 .blank,
-.day {
+.week-day {
     text-align: center;
     height: 40px;
+    
+}
+
+.week-day {
+    font-size: 0.8em;
+    padding: 0.5em;
 }
 
 .day {
@@ -64,14 +88,22 @@ tr {
 }
 
 .month-popup {
-    position: absolute;
-    padding: 5px;
-    background: white;
-    border: 2px solid skyblue;
+  position: absolute;
+  /* padding: 5px; */
+  background: white;
+  border: 2px solid skyblue;
+  font-size: 0.6em;
+  display: flex;
 }
 
 .month-popup div {
     padding: 0.3em;
+}
+
+.table-body {
+  max-height: 60%;
+  overflow: scroll;
+  padding: 2em;
 }
 
 .nav-month {
@@ -94,8 +126,6 @@ tr {
 .label-month,
 .label-year {
     font-size: 0.6em;
-}
-
-.label-month {
+    text-decoration: underline;
     cursor: pointer;
 }

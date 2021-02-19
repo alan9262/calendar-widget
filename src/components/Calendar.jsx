@@ -144,7 +144,7 @@ class Calendar extends Component {
   render() {
     let wd = this.shortWeekdays.map(element => {
       return (
-        <td key={element} className="day">{element}</td>
+        <td key={element} className="week-day">{element}</td>
       )
     });
     let emptyWeeks = [];
@@ -157,8 +157,10 @@ class Calendar extends Component {
       )
     }
     for (let d = 1; d <= this.daysPerMonth(); d++) {
+      let className = (d == this.currentDay() ? "day current-day": "day");
+      let selectedClass = (d == this.state.selectedDay ? " selected-day " : "")
       daysPerMonth.push(
-        <td key={d}>
+        <td key={d} className={className + selectedClass}>
           <span>{d}</span>
         </td>
       )
@@ -172,32 +174,36 @@ class Calendar extends Component {
     });
 
     return (
-      <div className="container">
+      <div className="divider">
+        <div className="container">
         <table className="calendar">
           <thead>
             <tr className="header">
               <td colSpan="5">
                   <this.RenderMonth/>&nbsp;
                   <this.RenderYear/>
-                  <td colSpan = "2">
-                    <i onClick={(e) => {this.prevMonth()}}>
+                  <td colSpan = "2" className= "switchers">
+                    <button onClick={(e) => {this.prevMonth()}}>
                       {"<"}
-                    </i>
-                    <i onClick={(e) => {this.nextMonth()}}>
+                    </button>
+                    <button onClick={(e) => {this.nextMonth()}}>
                       {">"}
-                    </i>
+                    </button>
                   </td>
               </td>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="table-body">
             <tr>
               {wd}
             </tr>
             {calendarRows}
           </tbody>
         </table>
+        </div>
+        <div class="scheduler">
         <Scheduler weekdays={wd} rows={calendarRows}/>
+      </div>
       </div>
     )
   }
