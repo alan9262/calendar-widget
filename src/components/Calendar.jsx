@@ -1,19 +1,13 @@
 import React, { Component } from "react";
 import moment from "moment";
-import { range } from "moment-range";
-// import "./calendar.css";
+import "./calendar.css";
+import Scheduler from "../components/Scheduler";
 
 class Calendar extends Component {
   state = {
     currentMoment: moment(),
-    today: moment(),
     showMonths: false,
     showYears: false
-  }
-  constructor(props) {
-    super(props);
-    this.width = props.width || "350px";
-    this.style = props.style || {};
   }
 
   weekdays = moment.weekdays();
@@ -34,11 +28,9 @@ class Calendar extends Component {
   month = () => {
     return this.state.currentMoment.format('MMMM')
   }
-
   getFirstDayOfMonth = () => {
     return moment(this.state.currentMoment).startOf('month').format('d');
   }
-
   formatTheCalendar = (emptyWeeks, daysPerMonth) => {
     var totalDays = [...emptyWeeks, ...daysPerMonth];
     let rows = [];
@@ -69,7 +61,6 @@ class Calendar extends Component {
     this.setMonth(data);
     this.props.onMonthChange && this.props.onMonthChange();
   }
-
   SelectList = (props) => {
     let popup = props.data.map((data) => {
       return (
@@ -100,13 +91,11 @@ class Calendar extends Component {
       </span>
     )
   }
-
   showYears = () => {
     this.setState({
       showYearPopup: true
     })
   }
-
   setYear = (year) => {
     let tempMoment = Object.assign({}, this.state.currentMoment);
     tempMoment = moment(tempMoment).set("year", year);
@@ -114,7 +103,6 @@ class Calendar extends Component {
       currentMoment: tempMoment
     })
   }
-
   onKeyUpYear = (e) => {
     if(e.which === 13 || e.which === 27) {
       this.setYear(e.target.value);
@@ -122,25 +110,22 @@ class Calendar extends Component {
         showYearPopup: false
       })
     }
-    
-    
   }
-
   onYearChange = (e) => {
     this.setYear(e.target.value);
     this.props.onYearChange && this.props.onYearChange(e, e.target.value);
   }
-
   RenderYear = () => {
     return (
       this.state.showYearPopup ? 
       <input defaultValue = {this.year()}
+             className="editor-year"
              ref = {(yearValue) => this.yearValue = yearValue}
              onKeyUp = {(e) => this.onKeyUpYear(e)}
              onChange = {(e) => this.onYearChange(e)}
              type = "number"/>
        :
-      <span onClick = {(e) => {this.showYears()}}>
+      <span className="label-year" onClick = {(e) => {this.showYears()}}>
         {this.year()}
       </span>
     );
@@ -150,7 +135,6 @@ class Calendar extends Component {
     tmpMoment = moment(tmpMoment).subtract(1, "month");
     this.setState({currentMoment: tmpMoment})
   }
-
   nextMonth = () => {
     let tmpMoment = Object.assign({}, this.state.currentMoment);
     tmpMoment = moment(tmpMoment).add(1, "month");
@@ -179,7 +163,7 @@ class Calendar extends Component {
         </td>
       )
     }
-    let calendarRows = this.formatTheCalendar(emptyWeeks, daysPerMonth).map((value, index) => {
+    var calendarRows = this.formatTheCalendar(emptyWeeks, daysPerMonth).map((value, index) => {
       return (
         <tr key={index * 10}>
           {value}
@@ -193,8 +177,7 @@ class Calendar extends Component {
           <thead>
             <tr className="header">
               <td colSpan="5">
-                  <this.RenderMonth/>
-                  {" "}
+                  <this.RenderMonth/>&nbsp;
                   <this.RenderYear/>
                   <td colSpan = "2">
                     <i onClick={(e) => {this.prevMonth()}}>
@@ -214,6 +197,7 @@ class Calendar extends Component {
             {calendarRows}
           </tbody>
         </table>
+        <Scheduler weekdays={wd} rows={calendarRows}/>
       </div>
     )
   }
