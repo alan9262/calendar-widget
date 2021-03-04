@@ -1,28 +1,97 @@
-.container,
-.calendar,
-.header,
-td,
-tr {
-    padding: 0;
-    margin: 0;
+.container-page, .calendar, .header, td, tr {
+  padding: 0;
+  margin: 1em;
+}
+
+.header-class {
+  background-color: darkslateblue;
+  color: white;
+  font-family: 'Courier New', Courier, monospace;
+  height: 4em;
+  border: 1px solid black;
+  display: flex;
+}
+
+.pull-right {
+  margin-left: 80em;
 }
 
 .divider {
   display: flex;
 }
 
+.event-created {
+  background-color: red;
+  width: auto;
+  height: auto;
+}
+
+.table-header {
+  display: table;
+  margin-left: 0.5em;
+}
+
+.scheduler-thead {
+  background-color: #009879;
+  color: #ffffff;
+  text-align: left;
+  display: table;
+  width: calc(100%);
+}
+
+.scheduler th, .scheduler td {
+  padding: 2em 4em;
+  
+}
+
+.scheduler-thead-week {
+    background: lightyellow;
+    color: black;
+    /* width: auto; */
+    display: table-header-group;
+    width: calc(100%);
+}
+
+.time-header td:hover {
+  background-color: initial;
+}
+
+.scheduler-tbody {
+  display: block;
+  max-height: 500px;
+  width: calc(100%);
+  overflow-y: scroll;
+}
+
+.scheduler-tbody td:hover {
+  background-color: #4285f4;
+  border-radius: 25px;
+}
+
+.scheduler-tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+.scheduler-tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.scheduler-tbody tr:last-of-type {
+  border-bottom: 2px solid #009879;
+}
+
+.scheduler-tbody tr.active-row {
+  font-weight: bold;
+  color: #009879;
+}
 
 .calendar {
-    background-color: white;
-    border-spacing: 0;
-    width: 100%;
-    display: inline-block;
-    margin: 25px 0;
-    font-size: 1.6em;
-    font-family: cursive;
-    min-width: 270px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-    
+  background-color: white;
+  display: table;
+  font-size: 1.6em;
+  min-width: 270px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  padding: 0.5em;
 }
 
 button {
@@ -36,96 +105,103 @@ button {
   margin-left: 0.5em;
 }
 
+.switchers button {
+  background-color: #f3f3f3;
+  border-radius: 25px;
+}
+
 .header {
-    border-bottom: 1px dashed skyblue;
-    font-size: 1.6em;
+  border-bottom: 2px dashed skyblue;
+  font-size: 1.6em;
 }
 
 .header td {
-    border-spacing: 0;
-    padding-left: 5px;
+  /* border-spacing: 0; */
+  padding-left: 1em;
 }
 
-.day,
-.blank,
-.week-day {
-    text-align: center;
-    height: 40px;
-    
+.day, .blank, .week-day {
+  text-align: center;
+  height: 40px;
+}
+
+.week-day-head {
+
+  color: lightyellow;
 }
 
 .week-day {
-    font-size: 0.8em;
-    padding: 0.5em;
+  font-size: 0.8em;
+  padding: 0.5em;
 }
 
 .day {
-    font-size: 0.8em;
+  font-size: 0.8em;
 }
 
 .day {
-    cursor: pointer;
-    width: 24px;
-    height: 24px;
-    line-height: 24px;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
 }
 
 .current-day {
-    background-color: #4285f4;
-    width: 28px;
-    height: 28px;
-    line-height: 28px;
-    border-radius: 2%;
-    color: white;
+  background-color: #4285f4;
+  width: 28px;
+  height: 28px;
+  line-height: 28px;
+  border-radius: 2%;
+  color: white;
 }
+
 .selected-day {
-    background-color:yellow;
-    width: 28px;
-    height: 28px;
-    line-height: 28px;
-    border-radius: 2%;
-    color: black;
+  background-color: yellow;
+  width: 28px;
+  height: 28px;
+  line-height: 28px;
+  border-radius: 2%;
+  color: black;
 }
 
 .month-popup {
   position: absolute;
   /* padding: 5px; */
-  background: white;
+  background: floralwhite;
   border: 2px solid skyblue;
-  font-size: 0.6em;
+  font-size: 0.8em;
   display: flex;
+  z-index: 11;
 }
 
 .month-popup div {
-    padding: 0.3em;
+  padding: 0.3em;
 }
 
 .table-body {
-  max-height: 60%;
-  overflow: scroll;
-  padding: 2em;
+  padding: 0.5em;
+  /* display: table; */
+  table-layout: fixed;
+  display: table;
+  position: sticky;
+  max-height: 160px;
+  overflow-y: scroll;
 }
 
 .nav-month {
-    position: absolute;
-    top: 0.6em;
-    font-size: 0.6em;
-    right:3px;
-}
-
-.prev {
-}
-
-.next {
+  position: absolute;
+  top: 0.6em;
+  font-size: 0.6em;
+  right: 3px;
 }
 
 .editor-year {
-    max-width: 3.6em;
+  max-width: 3.6em;
 }
 
-.label-month,
-.label-year {
-    font-size: 0.6em;
-    text-decoration: underline;
-    cursor: pointer;
+.label-month, .label-year {
+  font-size: 0.6em;
+  text-decoration: underline;
+  cursor: pointer;
+  color: blue;
 }
